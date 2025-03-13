@@ -345,6 +345,10 @@ const OttoEngineSimulator = () => {
         <p style={subtitleStyle}>
           Interactive simulation of the four-stroke internal combustion engine cycle
         </p>
+        <p style={subtitleStyle}>
+          Siddharth Mirchandani - 9-2
+        </p>
+
       </div>
       
       <div style={contentContainerStyle}>

@@ -181,214 +181,244 @@ const OttoEngineSimulator = () => {
     }
   };
 
+  const containerStyle = {
+    maxWidth: '900px',
+    margin: '0 auto',
+    padding: '20px',
+    fontFamily: 'Arial, sans-serif',
+    background: 'linear-gradient(135deg, #2c3e50, #3498db)',
+    borderRadius: '10px',
+    color: '#fff'
+  };
+
+  const headerStyle = {
+    textAlign: 'center',
+    marginBottom: '24px'
+  };
+
+  const titleStyle = {
+    fontSize: '32px',
+    fontWeight: 'bold',
+    marginBottom: '8px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  };
+
+  const titleIconStyle = {
+    marginRight: '10px'
+  };
+
+  const subtitleStyle = {
+    fontSize: '16px',
+    opacity: '0.9',
+    margin: '0'
+  };
+
+  const contentContainerStyle = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '20px',
+    marginBottom: '20px'
+  };
+
+  const leftColumnStyle = {
+    flex: '1',
+    minWidth: '280px',
+    background: '#fff',
+    padding: '20px',
+    borderRadius: '8px',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    textAlign: 'center'
+  };
+
+  const canvasStyle = {
+    border: '1px solid #ddd',
+    display: 'block',
+    margin: '0 auto',
+    borderRadius: '4px'
+  };
+
+  const rightColumnStyle = {
+    flex: '1',
+    minWidth: '280px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px'
+  };
+
+  const cycleInfoStyle = {
+    background: 'rgba(52, 152, 219, 0.2)',
+    backdropFilter: 'blur(10px)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    borderRadius: '8px',
+    padding: '16px'
+  };
+
+  const cycleHeadingStyle = {
+    fontSize: '22px',
+    fontWeight: 'bold',
+    marginBottom: '8px'
+  };
+
+  const cycleParagraphStyle = {
+    margin: 0
+  };
+
+  const controlsContainerStyle = {
+    background: 'rgba(255, 255, 255, 0.15)',
+    backdropFilter: 'blur(10px)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    borderRadius: '8px',
+    padding: '16px'
+  };
+
+  const controlsHeadingStyle = {
+    fontSize: '20px',
+    fontWeight: 'bold',
+    marginBottom: '16px',
+    display: 'flex',
+    alignItems: 'center'
+  };
+
+  const controlsIconStyle = {
+    marginRight: '8px'
+  };
+
+  const toggleButtonStyle = {
+    padding: '10px',
+    background: isRunning ? '#e74c3c' : '#2ecc71',
+    color: 'white',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    fontSize: '16px',
+    width: '100%',
+    marginBottom: '16px',
+    fontWeight: 'bold'
+  };
+
+  const speedControlStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    margin: '16px 0'
+  };
+
+  const speedLabelStyle = {
+    fontWeight: 'bold'
+  };
+
+  const speedInputStyle = {
+    flex: '1'
+  };
+
+  const speedValueStyle = {
+    background: 'rgba(255, 255, 255, 0.2)',
+    padding: '3px 8px',
+    borderRadius: '3px'
+  };
+
+  const rotationControlsStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '16px 0'
+  };
+
+  const rotationButtonStyle = (angle) => ({
+    padding: '8px 12px',
+    background: '#3498db',
+    color: 'white',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: isRunning ? 'not-allowed' : 'pointer',
+    opacity: isRunning ? 0.6 : 1
+  });
+
   return (
-    <div style={{
-      maxWidth: '900px',
-      margin: '0 auto',
-      padding: '20px',
-      fontFamily: 'Arial, sans-serif',
-      background: 'linear-gradient(135deg, #2c3e50, #3498db)',
-      borderRadius: '10px',
-      color: '#fff'
-    }}>
-      <div style={{
-        textAlign: 'center',
-        marginBottom: '24px'
-      }}>
-        <h1 style={{
-          fontSize: '32px',
-          fontWeight: 'bold',
-          marginBottom: '8px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
-          <span style={{marginRight: '10px'}}>⚙️</span>
+    <div style={containerStyle}>
+      <div style={headerStyle}>
+        <h1 style={titleStyle}>
+          <span style={titleIconStyle}>⚙️</span>
           Otto Engine Simulator
         </h1>
-        <p style={{
-          fontSize: '16px',
-          opacity: '0.9',
-          margin: '0'
-        }}>
+        <p style={subtitleStyle}>
           Interactive simulation of the four-stroke internal combustion engine cycle
         </p>
       </div>
       
-      <div style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '20px',
-        marginBottom: '20px'
-      }}>
+      <div style={contentContainerStyle}>
         {/* Left column - Engine visualization */}
-        <div style={{
-          flex: '1',
-          minWidth: '280px',
-          background: '#fff',
-          padding: '20px',
-          borderRadius: '8px',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          textAlign: 'center'
-        }}>
+        <div style={leftColumnStyle}>
           <canvas 
             ref={canvasRef} 
             width="200" 
             height="320" 
-            style={{
-              border: '1px solid #ddd',
-              display: 'block',
-              margin: '0 auto',
-              borderRadius: '4px'
-            }}
+            style={canvasStyle}
           />
         </div>
         
         {/* Right column - Controls and info */}
-        <div style={{
-          flex: '1',
-          minWidth: '280px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px'
-        }}>
+        <div style={rightColumnStyle}>
           {/* Current cycle info */}
-          <div style={{
-            background: 'rgba(52, 152, 219, 0.2)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            borderRadius: '8px',
-            padding: '16px'
-          }}>
-            <h2 style={{
-              fontSize: '22px',
-              fontWeight: 'bold',
-              marginBottom: '8px'
-            }}>{cycleNames[cycle]}</h2>
-            <p style={{margin: 0}}>{cycleDescriptions[cycle]}</p>
+          <div style={cycleInfoStyle}>
+            <h2 style={cycleHeadingStyle}>{cycleNames[cycle]}</h2>
+            <p style={cycleParagraphStyle}>{cycleDescriptions[cycle]}</p>
           </div>
           
           {/* Controls */}
-          <div style={{
-            background: 'rgba(255, 255, 255, 0.15)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            borderRadius: '8px',
-            padding: '16px'
-          }}>
-            <h2 style={{
-              fontSize: '20px',
-              fontWeight: 'bold',
-              marginBottom: '16px',
-              display: 'flex',
-              alignItems: 'center'
-            }}>
-              <span style={{marginRight: '8px'}}>🎮</span>
+          <div style={controlsContainerStyle}>
+            <h2 style={controlsHeadingStyle}>
+              <span style={controlsIconStyle}>🎮</span>
               Engine Controls
             </h2>
             
             <button 
               onClick={toggleEngine}
-              style={{
-                padding: '10px',
-                background: isRunning ? '#e74c3c' : '#2ecc71',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontSize: '16px',
-                width: '100%',
-                marginBottom: '16px',
-                fontWeight: 'bold'
-              }}
+              style={toggleButtonStyle}
             >
               {isRunning ? 'Stop Engine' : 'Start Engine'}
             </button>
             
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              margin: '16px 0'
-            }}>
-              <span style={{fontWeight: 'bold'}}>Speed:</span>
+            <div style={speedControlStyle}>
+              <span style={speedLabelStyle}>Speed:</span>
               <input 
                 type="range" 
                 min="1" 
                 max="5" 
                 value={speed} 
                 onChange={(e) => setSpeed(parseInt(e.target.value))}
-                style={{flex: '1'}}
+                style={speedInputStyle}
                 disabled={!isRunning}
               />
-              <span style={{
-                background: 'rgba(255, 255, 255, 0.2)',
-                padding: '3px 8px',
-                borderRadius: '3px'
-              }}>{speed}x</span>
+              <span style={speedValueStyle}>{speed}x</span>
             </div>
             
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              margin: '16px 0'
-            }}>
+            <div style={rotationControlsStyle}>
               <button 
                 onClick={() => rotateManually(-15)}
-                style={{
-                  padding: '8px 12px',
-                  background: '#3498db',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: isRunning ? 'not-allowed' : 'pointer',
-                  opacity: isRunning ? 0.6 : 1
-                }}
+                style={rotationButtonStyle(-15)}
                 disabled={isRunning}
               >
                 -15°
               </button>
               <button 
                 onClick={() => rotateManually(-90)}
-                style={{
-                  padding: '8px 12px',
-                  background: '#3498db',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: isRunning ? 'not-allowed' : 'pointer',
-                  opacity: isRunning ? 0.6 : 1
-                }}
+                style={rotationButtonStyle(-90)}
                 disabled={isRunning}
               >
                 -90°
               </button>
               <button 
                 onClick={() => rotateManually(90)}
-                style={{
-                  padding: '8px 12px',
-                  background: '#3498db',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: isRunning ? 'not-allowed' : 'pointer',
-                  opacity: isRunning ? 0.6 : 1
-                }}
+                style={rotationButtonStyle(90)}
                 disabled={isRunning}
               >
                 +90°
               </button>
               <button 
                 onClick={() => rotateManually(15)}
-                style={{
-                  padding: '8px 12px',
-                  background: '#3498db',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: isRunning ? 'not-allowed' : 'pointer',
-                  opacity: isRunning ? 0.6 : 1
-                }}
+                style={rotationButtonStyle(15)}
                 disabled={isRunning}
               >
                 +15°
@@ -397,5 +427,8 @@ const OttoEngineSimulator = () => {
           </div>
         </div>
       </div>
-      
-      {/* Otto
+    </div>
+  );
+};
+
+export default OttoEngineSimulator;

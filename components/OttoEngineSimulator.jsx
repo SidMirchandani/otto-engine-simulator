@@ -10,9 +10,9 @@ const OttoEngineSimulator = () => {
   const cycleNames = ["Intake Stroke", "Compression Stroke", "Power Stroke", "Exhaust Stroke"];
   const cycleDescriptions = [
     "Air-fuel mixture enters the cylinder as the piston moves down.",
-    "Piston moves upward, compressing the air-fuel mixture.",
-    "Spark plug ignites the compressed mixture, forcing the piston down.",
-    "Piston moves up, pushing exhaust gases out of the cylinder."
+    "The Piston moves upward, compressing the air-fuel mixture.",
+    "The Spark plug ignites the compressed mixture, forcing the piston down.",
+    "The Piston moves up, pushing exhaust gases out of the cylinder."
   ];
   
   // Animation frame control

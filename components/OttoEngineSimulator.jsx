@@ -356,10 +356,10 @@ const OttoEngineSimulator = () => {
           The Otto cycle is a four-stroke cycle that powers most car engines:
         </p>
         <ol style={{paddingLeft: '20px'}}>
-          <li style={{margin: '5px 0'}}><strong>Intake Stroke:</strong> Piston moves down, drawing in air-fuel mixture</li>
-          <li style={{margin: '5px 0'}}><strong>Compression Stroke:</strong> Piston moves up, compressing the air-fuel mixture</li>
-          <li style={{margin: '5px 0'}}><strong>Power Stroke:</strong> Spark ignites the mixture, forcing the piston down</li>
-          <li style={{margin: '5px 0'}}><strong>Exhaust Stroke:</strong> Piston moves up, expelling exhaust gases</li>
+          <li style={{margin: '5px 0'}}><strong>Intake Stroke:</strong> The Piston moves down, drawing in air-fuel mixture</li>
+          <li style={{margin: '5px 0'}}><strong>Compression Stroke:</strong> The Piston moves up, compressing the air-fuel mixture</li>
+          <li style={{margin: '5px 0'}}><strong>Power Stroke:</strong> The Spark ignites the mixture, forcing the piston down</li>
+          <li style={{margin: '5px 0'}}><strong>Exhaust Stroke:</strong> The Piston moves up, expelling exhaust gases</li>
         </ol>
       </div>
     </div>

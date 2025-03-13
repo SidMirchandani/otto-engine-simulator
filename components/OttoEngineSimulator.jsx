@@ -212,7 +212,19 @@ const OttoEngineSimulator = () => {
   const subtitleStyle = {
     fontSize: '16px',
     opacity: '0.9',
-    margin: '0'
+    margin: '0',
+    alignItems: 'center',
+    justifyContent: 'center'
+  };
+
+   const nameStyle = {
+    fontSize: '20px',
+    opacity: '0.9',
+    fontWeight: 'bold',
+    margin: '4',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   };
 
   const contentContainerStyle = {
@@ -345,7 +357,7 @@ const OttoEngineSimulator = () => {
         <p style={subtitleStyle}>
           Interactive simulation of the four-stroke internal combustion engine cycle
         </p>
-        <p style={subtitleStyle}>
+        <p style={nameStyle}>
           Siddharth Mirchandani - 9-2
         </p>
 

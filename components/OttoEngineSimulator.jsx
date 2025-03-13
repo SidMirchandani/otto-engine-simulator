@@ -360,11 +360,6 @@ const OttoEngineSimulator = () => {
         
         {/* Right column - Controls and info */}
         <div style={rightColumnStyle}>
-          {/* Current cycle info */}
-          <div style={cycleInfoStyle}>
-            <h2 style={cycleHeadingStyle}>{cycleNames[cycle]}</h2>
-            <p style={cycleParagraphStyle}>{cycleDescriptions[cycle]}</p>
-          </div>
           
           {/* Controls */}
           <div style={controlsContainerStyle}>
@@ -425,6 +420,13 @@ const OttoEngineSimulator = () => {
               </button>
             </div>
           </div>
+
+          {/* Current cycle info */}
+          <div style={cycleInfoStyle}>
+            <h2 style={cycleHeadingStyle}>{cycleNames[cycle]}</h2>
+            <p style={cycleParagraphStyle}>{cycleDescriptions[cycle]}</p>
+          </div>
+
         </div>
       </div>
     </div>

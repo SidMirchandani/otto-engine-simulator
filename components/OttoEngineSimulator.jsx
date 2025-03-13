@@ -1,10 +1,11 @@
-  import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const OttoEngineSimulator = () => {
   const [cycle, setCycle] = useState(0); // 0: Intake, 1: Compression, 2: Power, 3: Exhaust
   const [isRunning, setIsRunning] = useState(false);
   const [speed, setSpeed] = useState(1); // 1-5 speed multiplier
   const [crankAngle, setCrankAngle] = useState(0);
+  const [activeTab, setActiveTab] = useState('engine-view');
   const canvasRef = useRef(null);
   
   const cycleNames = ["Intake Stroke", "Compression Stroke", "Power Stroke", "Exhaust Stroke"];
@@ -82,14 +83,14 @@ const OttoEngineSimulator = () => {
     // Intake valve (left)
     ctx.beginPath();
     ctx.arc(75, 60, 8, 0, Math.PI * 2);
-    ctx.fillStyle = intakeValveOpen ? "#66f" : "#66a";
+    ctx.fillStyle = intakeValveOpen ? "#3498db" : "#2980b9";
     ctx.fill();
     ctx.stroke();
     
     // Exhaust valve (right)
     ctx.beginPath();
     ctx.arc(125, 60, 8, 0, Math.PI * 2);
-    ctx.fillStyle = exhaustValveOpen ? "#f66" : "#a66";
+    ctx.fillStyle = exhaustValveOpen ? "#e74c3c" : "#c0392b";
     ctx.fill();
     ctx.stroke();
     
@@ -181,189 +182,76 @@ const OttoEngineSimulator = () => {
     }
   };
 
-  const containerStyle = {
-    maxWidth: '900px',
-    margin: '0 auto',
-    padding: '20px',
-    fontFamily: 'Arial, sans-serif'
-  };
-
-  const titleStyle = {
-    fontSize: '28px',
-    fontWeight: 'bold',
-    marginBottom: '20px'
-  };
-
-  const flexContainerStyle = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '20px'
-  };
-
-  const canvasContainerStyle = {
-    flex: '1',
-    minWidth: '250px',
-    padding: '15px',
-    backgroundColor: 'white',
-    borderRadius: '8px',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
-  };
-
-  const infoContainerStyle = {
-    flex: '1',
-    minWidth: '250px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '20px'
-  };
-
-  const sectionStyle = {
-    padding: '15px',
-    backgroundColor: 'white',
-    borderRadius: '8px',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
-  };
-
-  const sectionTitleStyle = {
-    fontSize: '20px',
-    fontWeight: 'bold',
-    marginBottom: '10px'
-  };
-
-  const buttonStyle = {
-    padding: '10px',
-    backgroundColor: isRunning ? '#dc3545' : '#28a745',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    fontSize: '16px',
-    width: '100%',
-    marginBottom: '10px'
-  };
-
-  const speedContainerStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-    margin: '10px 0'
-  };
-
-  const rotationButtonsStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    margin: '10px 0'
-  };
-
-  const smallButtonStyle = {
-    padding: '5px 10px',
-    backgroundColor: '#007bff',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: isRunning ? 'not-allowed' : 'pointer',
-    opacity: isRunning ? 0.6 : 1
-  };
-
-  const explanationStyle = {
-    marginTop: '20px',
-    padding: '15px',
-    backgroundColor: 'white',
-    borderRadius: '8px',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
-  };
-
   return (
-    <div style={containerStyle}>
-      <h1 style={titleStyle}>Otto Engine Simulator</h1>
-      
-      <div style={flexContainerStyle}>
-        <div style={canvasContainerStyle}>
-          <canvas 
-            ref={canvasRef} 
-            width="200" 
-            height="320" 
-            style={{border: '1px solid #ddd', display: 'block', margin: '0 auto'}}
-          />
-        </div>
-        
-        <div style={infoContainerStyle}>
-          <div style={sectionStyle}>
-            <h2 style={sectionTitleStyle}>{cycleNames[cycle]}</h2>
-            <p style={{color: '#333'}}>{cycleDescriptions[cycle]}</p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-indigo-800 p-4 text-gray-800">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <header className="text-center text-white mb-8 pt-6">
+          <div className="flex items-center justify-center mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83M16.62 12l-5.74 9.94" />
+            </svg>
+            <h1 className="text-4xl font-bold">Otto Engine Simulator</h1>
           </div>
-          
-          <div style={sectionStyle}>
-            <h2 style={sectionTitleStyle}>Engine Controls</h2>
-            <button 
-              onClick={toggleEngine}
-              style={buttonStyle}
-            >
-              {isRunning ? 'Stop Engine' : 'Start Engine'}
-            </button>
-            
-            <div style={speedContainerStyle}>
-              <span style={{fontWeight: 'bold'}}>Speed:</span>
-              <input 
-                type="range" 
-                min="1" 
-                max="5" 
-                value={speed} 
-                onChange={(e) => setSpeed(parseInt(e.target.value))}
-                style={{flex: '1'}}
-                disabled={!isRunning}
-              />
-              <span style={{backgroundColor: '#e9f5ff', padding: '3px 8px', borderRadius: '3px'}}>{speed}x</span>
-            </div>
-            
-            <div style={rotationButtonsStyle}>
-              <button 
-                onClick={() => rotateManually(-15)}
-                style={smallButtonStyle}
-                disabled={isRunning}
-              >
-                -15°
-              </button>
-              <button 
-                onClick={() => rotateManually(-90)}
-                style={smallButtonStyle}
-                disabled={isRunning}
-              >
-                -90°
-              </button>
-              <button 
-                onClick={() => rotateManually(90)}
-                style={smallButtonStyle}
-                disabled={isRunning}
-              >
-                +90°
-              </button>
-              <button 
-                onClick={() => rotateManually(15)}
-                style={smallButtonStyle}
-                disabled={isRunning}
-              >
-                +15°
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div style={explanationStyle}>
-        <h2 style={sectionTitleStyle}>Otto Cycle Explanation</h2>
-        <p style={{marginBottom: '10px'}}>
-          The Otto cycle is a four-stroke cycle that powers most car engines:
-        </p>
-        <ol style={{paddingLeft: '20px'}}>
-          <li style={{margin: '5px 0'}}><strong>Intake Stroke:</strong> The Piston moves down, drawing in air-fuel mixture</li>
-          <li style={{margin: '5px 0'}}><strong>Compression Stroke:</strong> The Piston moves up, compressing the air-fuel mixture</li>
-          <li style={{margin: '5px 0'}}><strong>Power Stroke:</strong> The Spark ignites the mixture, forcing the piston down</li>
-          <li style={{margin: '5px 0'}}><strong>Exhaust Stroke:</strong> The Piston moves up, expelling exhaust gases</li>
-        </ol>
-      </div>
-    </div>
-  );
-};
+          <p className="text-xl opacity-80">
+            Interactive simulation of the four-stroke internal combustion engine cycle
+          </p>
+        </header>
 
-export default OttoEngineSimulator;
+        {/* Main Container */}
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+          {/* Tab Navigation */}
+          <div className="flex border-b bg-gray-50">
+            <button 
+              className={`px-6 py-3 font-medium text-sm flex items-center ${activeTab === 'engine-view' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600 hover:text-blue-600'}`}
+              onClick={() => setActiveTab('engine-view')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                <polyline points="2 17 12 22 22 17" />
+                <polyline points="2 12 12 17 22 12" />
+              </svg>
+              Engine View
+            </button>
+            <button 
+              className={`px-6 py-3 font-medium text-sm flex items-center ${activeTab === 'cycle-details' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600 hover:text-blue-600'}`}
+              onClick={() => setActiveTab('cycle-details')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              Cycle Details
+            </button>
+          </div>
+
+          {/* Content Area */}
+          <div className="p-6">
+            <div className="flex flex-wrap -mx-4">
+              {/* Left Column: Canvas */}
+              <div className="w-full md:w-1/2 px-4 mb-6">
+                <div className="bg-gray-50 border border-gray-200 rounded-md p-4 text-center">
+                  <canvas 
+                    ref={canvasRef} 
+                    width="200" 
+                    height="320" 
+                    className="mx-auto border border-gray-300 rounded bg-white"
+                  />
+                </div>
+              </div>
+
+              {/* Right Column: Controls and Info */}
+              <div className="w-full md:w-1/2 px-4">
+                {/* Current Cycle Info Card */}
+                <div className="bg-blue-50 border border-blue-100 rounded-md p-5 mb-6">
+                  <h2 className="text-xl font-bold text-blue-800 mb-2">{cycleNames[cycle]}</h2>
+                  <p className="text-blue-700">{cycleDescriptions[cycle]}</p>
+                </div>
+
+                {/* Engine Controls Card */}
+                <div className="bg-white border border-gray-200 rounded-md p-5 mb-6">
+                  <h2 className="text-lg font-bold mb-4 flex items-center text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="3" />
+                      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51

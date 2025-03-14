@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otto Cycle Engine Mind Map</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="mind-map">
+            <svg width="1000" height="500" id="mindMapSvg"></svg>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const svg = document.getElementById('mindMapSvg');
+            let hoveredNode = null;
+
+            // Define nodes
+            const nodes = [
+                { id: 'otto', label: 'Otto Cycle Engine', x: 460, y: 320, color: '#9b4dca' },
+                { id: 'racing', label: 'Racing', x: 90, y: 195, color: '#ff9999' },
+                { id: 'motorsports', label: 'Motorsports', x: 138, y: 252, color: '#ffccff' },
+                { id: 'roadTrips', label: 'Road Trips', x: 140, y: 310, color: '#ff9999' },
+                { id: 'expressionArt', label: 'Expression in Art', x: 140, y: 370, color: '#ff9999' },
+                { id: 'motorcycles', label: 'Motorcycles', x: 245, y: 195, color: '#ffccff' },
+                { id: 'culture', label: 'Culture', x: 300, y: 310, color: '#ffccff' },
+                { id: 'infrastructure', label: 'Increased Infrastructure', x: 270, y: 430, color: '#ff9999' },
+                { id: 'aviation', label: 'Aviation', x: 290, y: 130, color: '#ffccff' },
+                { id: 'transportation', label: 'Transportation', x: 398, y: 250, color: '#ffccff' },
+                { id: 'marineEngines', label: 'Marine Engines', x: 458, y: 130, color: '#ffccff' },
+                { id: 'construction', label: 'Construction', x: 360, y: 370, color: '#ffccff' },
+                { id: 'industry', label: 'Industry', x: 520, y: 370, color: '#ffccff' },
+                { id: 'agriculture', label: 'Agriculture', x: 520, y: 430, color: '#ffccff' },
+                { id: 'automobiles', label: 'Automobiles', x: 520, y: 195, color: '#ffccff' },
+                { id: 'society', label: 'Society', x: 580, y: 250, color: '#ffccff' },
+                { id: 'technology', label: 'Technology', x: 650, y: 310, color: '#ffccff' },
+                { id: 'engineRefinement', label: 'Engine Refinement', x: 715, y: 370, color: '#ffccff' },
+                { id: 'mechanization', label: 'Mechanization', x: 690, y: 430, color: '#ffccff' },
+                { id: 'tradeBenefit', label: 'Increased Trade', x: 365, y: 70, color: '#ff9999' },
+                { id: 'jobsCreated', label: 'Led to New Jobs', x: 685, y: 70, color: '#9b4dca' },
+                { id: 'military', label: 'Military Improvements', x: 717, y: 130, color: '#ff9999' },
+                { id: 'economics', label: 'Improved Economics', x: 735, y: 195, color: '#ff9999' },
+                { id: 'environmentIssues', label: 'Environment Issues', x: 780, y: 250, color: '#ff9999' },
+                { id: 'emissions', label: 'More Emmisions', x: 885, y: 310, color: '#ff9999' },
+                { id: 'efficiency', label: 'Efficiency', x: 850, y: 430, color: '#ff9999' }
+            ];
+
+            // Define connections
+            const connections = [
+                { from: 'otto', to: 'transportation' },
+                { from: 'otto', to: 'culture' },
+                { from: 'otto', to: 'technology' },
